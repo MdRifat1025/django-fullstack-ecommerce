@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+
+            <p>
+                <span class="text-muted text-decoration-line-through">৳{{ product.old_price }}</span>
+                <span class="fw-bold text-danger">৳{{ product.new_price }}</span>
+            </p>
+
+            {% if product.is_new_arrival %}
+                <span class="badge bg-success">New Arrival</span>
+            {% endif %}
+
+            <form method="POST" action="#">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label>Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control" style="width:100px;">
+                </div>
+                <button class="btn btn-primary">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

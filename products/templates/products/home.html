@@ -1,0 +1,47 @@
+{% extends 'products/base.html' %}
+{% block content %}
+
+<!-- Carousel -->
+<div id="carouselExample" class="carousel slide mb-4">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://via.placeholder.com/1200x300" class="d-block w-100">
+    </div>
+  </div>
+</div>
+
+<!-- Product Section -->
+<div class="container">
+  <div class="row">
+
+    {% for product in products %}
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="{{ product.image.url }}" class="card-img-top">
+        <div class="card-body">
+          <h5>{{ product.name }}</h5>
+          <p>{{ product.short_description }}</p>
+
+          <p>
+            <span class="text-muted text-decoration-line-through">
+              ৳{{ product.old_price }}
+            </span>
+            <span class="fw-bold text-danger">
+              ৳{{ product.new_price }}
+            </span>
+          </p>
+          <a href="{% url 'product_detail' product.slug %}" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
+
+          {% if product.is_new_arrival %}
+            <span class="badge bg-success">New Arrival</span>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
