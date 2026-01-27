@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', product_views.home, name='home'),  # home page
     path('products/', include('products.urls')),  # product detail urls
+    path('accounts/', include('accounts.urls')),
 ]
 
 
