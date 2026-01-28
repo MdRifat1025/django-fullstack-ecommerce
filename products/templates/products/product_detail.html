@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'products/base.html' %}
 {% block content %}
 
 <div class="container mt-4">
@@ -19,7 +19,7 @@
                 <span class="badge bg-success">New Arrival</span>
             {% endif %}
 
-            <form method="POST" action="#">
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label>Quantity:</label>

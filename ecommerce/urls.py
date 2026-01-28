@@ -9,6 +9,7 @@ urlpatterns = [
     path('', product_views.home, name='home'),  # home page
     path('products/', include('products.urls')),  # product detail urls
     path('accounts/', include('accounts.urls')),
+    path('cart/', include('cart.urls')),
 ]
 
 
