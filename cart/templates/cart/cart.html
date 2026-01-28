@@ -35,7 +35,8 @@
 
     <h4>Total: ৳{{ total }}</h4>
 
-    <a href="#" class="btn btn-success">Proceed to Checkout</a>
+    {% comment %} <a href="#" class="btn btn-success">Proceed to Checkout</a> {% endcomment %}
+    <a href="{% url 'place_order' %}" class="btn btn-success">Place Order</a>
 
     {% else %}
       <p>Your cart is empty.</p>
