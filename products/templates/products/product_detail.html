@@ -25,7 +25,12 @@
                     <label>Quantity:</label>
                     <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control" style="width:100px;">
                 </div>
-                <button class="btn btn-primary">Add to Cart</button>
+                    {% if product.stock > 0 %}
+                    <button>Add to Cart</button>
+                    {% else %}
+                    <span class="text-danger">Out of Stock</span>
+                    {% endif %}
+
             </form>
         </div>
     </div>

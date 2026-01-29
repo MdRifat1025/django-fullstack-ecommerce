@@ -129,3 +129,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 "custom "
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# payment gateway use sslecommerce
+
+SSLC_STORE_ID = 'myper697b5d5195d92'
+SSLC_STORE_PASS = 'myper697b5d5195d92@ssl'
+SSLC_SANDBOX = True
