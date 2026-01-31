@@ -1,19 +1,296 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<style>
+ 
+  .premium-navbar {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #020617 100%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(56, 189, 248, 0.1);
+    padding: 1rem 0;
+    position: relative;
+    backdrop-filter: blur(10px);
+  }
+ .premium-navbar .container,
+  .premium-navbar .navbar-collapse {
+    display: flex;
+    align-items: center; /* vertically centers brand, links, buttons */
+  }
+
+  /* Optional: keep spacing between brand and nav links */
+  .premium-navbar .navbar-nav {
+    align-items: center; /* vertical center for nav items */
+  }
+  .premium-navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    opacity: 0.5;
+  }
+
+  .premium-navbar .navbar-brand {
+    font-weight: 800;
+    font-size: 1.75rem;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #38bdf8, #60a5fa, #38bdf8);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.4s ease;
+    text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+    position: relative;
+  }
+
+  .premium-navbar .navbar-brand::before {
+    content: "✦";
+    position: absolute;
+    left: -25px;
+    color: #38bdf8;
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+
+  .premium-navbar .navbar-brand:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+  }
+
+  .premium-navbar .nav-link {
+    color: #cbd5e1 !important;
+    margin-left: 1.5rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .premium-navbar .nav-link:hover,
+  .premium-navbar .nav-link.active {
+    color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  }
+
+  .premium-navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    z-index: -1;
+  }
+
+  .premium-navbar .nav-link:hover::before {
+    width: 120%;
+    height: 200%;
+  }
+
+  .premium-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  }
+
+  .premium-navbar .nav-link:hover::after,
+  .premium-navbar .nav-link.active::after {
+    width: 100%;
+  }
+
+  .premium-navbar .text-warning {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+  }
+
+  .premium-navbar .text-warning:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+  }
+
+  .premium-navbar .btn-outline-info {
+    border: 2px solid #38bdf8;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    color: #38bdf8;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  }
+
+  .premium-navbar .btn-outline-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .premium-navbar .btn-outline-info:hover::before {
+    left: 100%;
+  }
+
+  .premium-navbar .btn-outline-info:hover {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #ffffff;
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4), 0 0 30px rgba(56, 189, 248, 0.2);
+  }
+
+  .premium-navbar .btn-outline-info:active {
+    transform: translateY(0);
+  }
+
+  /* Cart badge enhancement */
+  .cart-badge {
+    position: relative;
+  }
+
+  .cart-badge::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    min-width: 18px;
+    text-align: center;
+  }
+
+  /* Mobile toggler enhancement */
+  .navbar-dark .navbar-toggler {
+    border: 2px solid #38bdf8;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-dark .navbar-toggler:hover {
+    background: rgba(56, 189, 248, 0.1);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  }
+
+  .navbar-dark .navbar-toggler-icon {
+    filter: invert(80%);
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 991.98px) {
+    .premium-navbar .nav-link {
+      margin-left: 0;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      padding: 0.75rem 1rem !important;
+    }
+
+    .premium-navbar .nav-link:hover {
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .premium-navbar .btn-outline-info {
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .premium-navbar .navbar-brand::before {
+      left: -20px;
+    }
+  }
+
+  /* Smooth scrolling effect */
+  @media (min-width: 992px) {
+    .premium-navbar {
+      transition: all 0.3s ease;
+    }
+
+    .premium-navbar.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  /* Accessibility improvements */
+  .premium-navbar .nav-link:focus,
+  .premium-navbar .btn-outline-info:focus {
+    outline: 2px solid #38bdf8;
+    outline-offset: 4px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark premium-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">MyShop</a>
 
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-      <li class="nav-item">
-   <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
-    </li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      {% if user.is_authenticated %}
-    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-      {% else %}
-    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-      {% endif %}
-    </ul>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link cart-badge" href="{% url 'view_cart' %}" data-count="0">Cart</a>
+        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-warning" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-sm btn-outline-info ms-lg-3" href="{% url 'register' %}">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
+
+<script>
+  // Optional: Add scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.premium-navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+</script>

@@ -1,11 +1,46 @@
 {% extends 'products/base.html' %}
 {% block content %}
-<div class="container mt-4">
+
+<style>
+  .register-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .register-container .form-control {
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+
+  .register-container .btn-primary {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .register-container .btn-primary:hover {
+    background-color: #0b5ed7;
+  }
+</style>
+
+<div class="register-container">
     <h2>Register</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+
 {% endblock %}
