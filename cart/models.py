@@ -9,6 +9,3 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.product.new_price * self.quantity
-
-    def __str__(self):
-        return f"{self.product.name} ({self.quantity})"
